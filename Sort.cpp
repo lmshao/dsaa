@@ -3,71 +3,72 @@
 //
 
 #include <iostream>
+#include <algorithm>
 #include "Sort.h"
 
 void Sort::test() {
     Sort ins;
-    vector<int> backup = {58, 62, 69, 20, 14, 70, 62, 31, 21, 7, 34};
+    vector<int> backup = {58, 62, 69, 20, 14, 70, 63, 31, 21, 7, 34};
     vector<int> vec = backup;
-    vector<int> exp = {7, 14, 20, 21, 31, 34, 58, 62, 62, 69, 70};
     for (int i: vec) {
         cout << i << " ";
     }
     cout << endl;
 
+    sort(vec.begin(), vec.end());
+    for (int i: vec) {
+        cout << i << " ";
+    }
+    cout << endl;
+
+    vec = backup;
     ins.InsertSort(vec);
-    if(vec == exp)
+    if(is_sorted(vec.begin(), vec.end()))
         cout << "InsertSort Pass\n";
     else
         cout << "InsertSort Failed\n";
 
     vec = backup;
     ins.ShellSort(vec);
-    if(vec == exp)
+    if(is_sorted(vec.begin(), vec.end()))
         cout << "ShellSort Pass\n";
     else
         cout << "ShellSort Failed\n";
 
     vec = backup;
     ins.SelectSort(vec);
-    if(vec == exp)
+    if(is_sorted(vec.begin(), vec.end()))
         cout << "SelectSort Pass\n";
     else
         cout << "SelectSort Failed\n";
 
     vec = backup;
-    ins.HeapSort(vec);
-    if(vec == exp)
-        cout << "HeapSort Pass\n";
-    else
-        cout << "HeapSort Failed\n";
-
-    vec = backup;
     ins.BubbleSort(vec);
-    if(vec == exp)
+    if(is_sorted(vec.begin(), vec.end()))
         cout << "BubbleSort Pass\n";
     else
         cout << "BubbleSort Failed\n";
 
     vec = backup;
     ins.QuickSort(vec);
-    if(vec == exp)
+    if(is_sorted(vec.begin(), vec.end()))
         cout << "QuickSort Pass\n";
     else
         cout << "QuickSort Failed\n";
 
     vec = backup;
+    ins.HeapSort(vec);
+    if(is_sorted(vec.begin(), vec.end()))
+        cout << "HeapSort Pass\n";
+    else
+        cout << "HeapSort Failed\n";
+
+    vec = backup;
     ins.MergeSort(vec);
-    if(vec == exp)
+    if(is_sorted(vec.begin(), vec.end()))
         cout << "MergeSort Pass\n";
     else
         cout << "MergeSort Failed\n";
-
-    for (int i: vec) {
-        cout << i << " ";
-    }
-    cout << endl;
-
 }
 
 // O(N^2)
@@ -111,16 +112,44 @@ void Sort::SelectSort(vector<int> &vec) {
     }
 }
 
-void Sort::HeapSort(vector<int> &vec) {
-
-
-}
-
 void Sort::BubbleSort(vector<int> &vec) {
-
+    for (int i = 0; i < vec.size() -1; ++i) {
+        for (int j = 1; j < vec.size() - i; ++j) {
+            if (vec[j-1] > vec[j])
+                swap(vec[j-1], vec[j]);
+        }
+    }
 }
 
+void Sort::QSort(vector<int> &vec, int left, int right){
+    if (left >= right)
+        return;
+
+    int t = vec[left];
+    int i = left;
+    int j = right;
+    while(i < j){
+        while(vec[j] >= t && i < j)
+            j--;
+
+        while(vec[i] <= t && i < j)
+            i++;
+
+        if (i < j)
+            swap(vec[i], vec[j]);
+    }
+    swap(vec[i], vec[left]);
+
+    QSort(vec, left, i - 1);
+    QSort(vec, i + 1, right);
+}
+
+// O(NlogN)
 void Sort::QuickSort(vector<int> &vec) {
+    QSort(vec, 0, (int)vec.size()-1);
+}
+
+void Sort::HeapSort(vector<int> &vec) {
 
 }
 

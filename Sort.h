@@ -15,10 +15,13 @@ public:
     void InsertSort(vector<int> &vec);
     void ShellSort(vector<int> &vec);
     void SelectSort(vector<int> &vec);
-    void HeapSort(vector<int> &vec);
     void BubbleSort(vector<int> &vec);
     void QuickSort(vector<int> &vec);
+    void HeapSort(vector<int> &vec);
     void MergeSort(vector<int> &vec);
+
+private:
+    void QSort(vector<int> &vec, int left, int right);
 
 };
 
