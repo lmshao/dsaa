@@ -22,6 +22,7 @@ public:
 
 private:
     void QSort(vector<int> &vec, int left, int right);
+    void PercDown(vector<int> & vec, int i, int length);
 
 };
 

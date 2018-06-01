@@ -149,13 +149,38 @@ void Sort::QuickSort(vector<int> &vec) {
     QSort(vec, 0, (int)vec.size()-1);
 }
 
-void Sort::HeapSort(vector<int> &vec) {
+#define LeftChild(i) (2*(i)+1)
+void Sort::PercDown(vector<int> &vec, int i, int length) {
+    int child;
+    int tmp;
+    for (tmp = vec[i]; LeftChild(i) < length; i = child) {
+        child = LeftChild(i);
+        if (child != length-1 && vec[child + 1] > vec[child]) // has right child node
+            child++;
 
+        if (tmp < vec[child])
+            vec[i] = vec[child];
+        else
+            break;
+    }
+    vec[i]=tmp;
+}
+
+void Sort::HeapSort(vector<int> &vec) {
+    for (int i = (int)vec.size()/2-1; i >= 0; --i)  // fist non-leaf node = N/2-1
+        PercDown(vec, i, (int)vec.size());
+
+    for (int j = (int)vec.size()-1; j > 0 ; --j) {
+        swap(vec[0], vec[j]);
+        PercDown(vec, 0, j);
+    }
 }
 
 void Sort::MergeSort(vector<int> &vec) {
 
 }
+
+
 
 
 
