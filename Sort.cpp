@@ -167,7 +167,7 @@ void Sort::PercDown(vector<int> &vec, int i, int length) {
 }
 
 void Sort::HeapSort(vector<int> &vec) {
-    for (int i = (int)vec.size()/2-1; i >= 0; --i)  // fist non-leaf node = N/2-1
+    for (int i = (int)vec.size()/2-1; i >= 0; --i)  // fist non-leaf node = N/2-11
         PercDown(vec, i, (int)vec.size());
 
     for (int j = (int)vec.size()-1; j > 0 ; --j) {
@@ -176,9 +176,46 @@ void Sort::HeapSort(vector<int> &vec) {
     }
 }
 
-void Sort::MergeSort(vector<int> &vec) {
+void Sort::MSort(vector<int> &vec, vector<int> &tmp, int left, int right) {
+    int center;
 
+    if (left < right){
+        center = (left + right) / 2;
+        MSort(vec, tmp, left, center);
+        MSort(vec, tmp, center+1, right);
+        Merge(vec, tmp, left, center+1, right);
+    }
 }
+
+void Sort::Merge(vector<int> &vec, vector<int> &tmp, int lpos, int rpos, int rend) {
+    int lend = rpos -1;
+    int tpos = lpos;
+    int num = rend - lpos +1;
+
+    while (lpos <= lend && rpos <= rend){
+        if (vec[lpos] < vec[rpos])
+            tmp[tpos++] = vec[lpos++];
+        else
+            tmp[tpos++] = vec[rpos++];
+    }
+
+    while (lpos <= lend)
+        tmp[tpos++] = vec[lpos++];
+
+    while (rpos <= rend)
+        tmp[tpos++] = vec[rpos++];
+
+    for (int i = 0; i < num; ++i, --rend)
+        vec[rend] = tmp[rend];
+}
+
+// O(NlogN)
+void Sort::MergeSort(vector<int> &vec) {
+    vector<int> tmp(vec.size());
+    MSort(vec, tmp, 0, (int)vec.size()-1);
+}
+
+
 
 
 

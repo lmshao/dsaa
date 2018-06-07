@@ -22,7 +22,9 @@ public:
 
 private:
     void QSort(vector<int> &vec, int left, int right);
-    void PercDown(vector<int> & vec, int i, int length);
+    void PercDown(vector<int> &vec, int i, int length);
+    void MSort(vector<int> &vec, vector<int> &tmp, int left, int right);
+    void Merge(vector<int> &vec, vector<int> &tmp, int lpos, int rpos, int rend);
 
 };
 
