@@ -3,4 +3,4 @@ project(DSAA)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(DSAA main.cpp Sort.cpp Sort.h)
+add_executable(DSAA main.cpp Sort.cpp Sort.h Tree.cpp Tree.h LinkedList.cpp LinkedList.h)
