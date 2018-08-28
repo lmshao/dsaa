@@ -14,6 +14,8 @@ typedef struct node {
 class Tree {
 public:
 
+    static void testTree();
+
     void destoryBiTree(Node *tree);
 
 // 递归方式前序遍历
@@ -23,18 +25,25 @@ public:
 // 递归方式后序遍历
     void posOrderRecur(Node* tree);
 
+    void levelOrderRevur(Node* tree);
+
 // 非递归方式
     void preOrderUnRecur(Node* tree);
     void inOrderUnRecur(Node* tree);
     void posOrderUnRecur(Node* tree);
 
+    int getDepth(Node *tree);
+
     Node* createBiTree(const int arr[], int size, int index);
+
+    void insertBST(Node *tree, int key);
+
+    bool searchBST(Node *tree, int key, Node **node);
 
 };
 
 
 
-void testTree();
 
 
 #endif //DSAA_TREE_H

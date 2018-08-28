@@ -21,7 +21,6 @@ void LinkedList::test() {
 
     ins.destroyLinkedList(&newSingleList);
 
-
     DoubleNode *doubleList = ins.createLinkedList((DoubleNode *)NULL, 11);
     ins.createLinkedList(doubleList, 12);
     ins.createLinkedList(doubleList, 13);

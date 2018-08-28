@@ -135,7 +135,7 @@ void Sort::QSort(vector<int> &vec, int left, int right){
         while(vec[i] <= t && i < j)
             i++;
 
-        if (i < j)
+//        if (i < j)
             swap(vec[i], vec[j]);
     }
     swap(vec[i], vec[left]);
